@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>CurseForgeUpdateMonitor</RootNamespace>
     <AssemblyName>CurseForgeUpdateMonitor</AssemblyName>
 
-    <!-- Framework-dependent single-file publish: small exe, but the .NET 8 Runtime
+    <!-- Framework-dependent single-file publish: small exe, but the .NET 10 Runtime
          must be installed on whichever machine runs it (see README.md for the full command).
-         Output exe will be in bin/Release/net8.0/win-x64/publish/ -->
+         Output exe will be in bin/Release/net10.0/win-x64/publish/ -->
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <SelfContained>false</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
