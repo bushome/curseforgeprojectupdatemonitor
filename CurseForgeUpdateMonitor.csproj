@@ -8,13 +8,12 @@
     <RootNamespace>CurseForgeUpdateMonitor</RootNamespace>
     <AssemblyName>CurseForgeUpdateMonitor</AssemblyName>
 
-    <!-- Single-file, self-contained publish settings.
-         Build with (see README.md for the full command).
+    <!-- Framework-dependent single-file publish: small exe, but the .NET 8 Runtime
+         must be installed on whichever machine runs it (see README.md for the full command).
          Output exe will be in bin/Release/net8.0/win-x64/publish/ -->
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-    <SelfContained>true</SelfContained>
+    <SelfContained>false</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
-    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 

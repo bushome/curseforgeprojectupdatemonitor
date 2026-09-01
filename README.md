@@ -8,12 +8,16 @@ everything else — RCON broadcast via `mcrcon.exe`, server restarts, etc.
 ## Build
 
 Requires the .NET 8 SDK (https://dotnet.microsoft.com/download) on the machine you
-build on — the *output* is a self-contained exe that needs nothing installed on
-the machine that runs it.
+build on.
+
+This is a **framework-dependent** build — the output exe is small (a few MB
+rather than 60-100MB), but every machine that *runs* it needs the .NET 8
+**Runtime** installed (not the full SDK — just the smaller "Desktop/Runtime"
+download from the same page). Install it once on each server before running
+the exe there.
 
 ```
-dotnet publish -c Release -r win-x64 --self-contained true ^
-    -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
+dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true
 ```
 
 The exe will be at:
@@ -24,6 +28,11 @@ bin\Release\net8.0\win-x64\publish\CurseForgeUpdateMonitor.exe
 Copy that exe to wherever you want it to live on the server, alongside a
 `config.json` (see below). `library.json` and `monitor.log` will be created next
 to the exe automatically.
+
+> Prefer a bigger exe with no runtime install required on the server? Drop
+> `--self-contained false` back to `--self-contained true` and add
+> `-p:IncludeNativeLibrariesForSelfExtract=true` — that's the self-contained
+> version this project started as.
 
 ## Setup
 
