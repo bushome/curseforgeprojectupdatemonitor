@@ -1,0 +1,20 @@
+{
+  "apiKey": "PUT-YOUR-CURSEFORGE-API-KEY-HERE",
+  "pollIntervalSeconds": 300,
+  "batFilePath": "C:\\ArkTools\\update-broadcast.bat",
+  "libraryFilePath": "library.json",
+  "batFileTimeoutSeconds": 0,
+  "projectIds": "955333,985370,942249,1123898,942024",
+  "crashMonitor": {
+    "enabled": false,
+    "checkIntervalSeconds": 30,
+    "restartCooldownSeconds": 120,
+    "servers": [
+      {
+        "name": "Aberration",
+        "processPath": "D:\\servers\\AberrationASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\AberrationASM\\run.cmd"
+      }
+    ]
+  }
+}
