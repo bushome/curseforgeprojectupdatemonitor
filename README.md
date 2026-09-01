@@ -37,7 +37,18 @@ to the exe automatically.
 
 ## Setup
 
-1. Get a CurseForge Core API key: https://console.curseforge.com/
+1. Get a CurseForge Core API key:
+   - Go to https://console.curseforge.com/ and sign in with your CurseForge/Overwolf
+     account (Google sign-in is common here).
+   - You may be prompted to create/select an organization first — that's normal,
+     just click through it.
+   - Go to **Settings > API Keys**, and generate/copy the key listed under
+     **"CurseForge Core API"** — that's the one this app needs (`apiKey` in
+     `config.json`).
+   - If that section isn't available on your account, CurseForge also has a
+     formal application process for API access — see
+     https://support.curseforge.com/en/support/solutions/articles/9000208346-about-the-curseforge-api-and-how-to-apply-for-a-key
+     for the application form; approved keys are emailed after review.
 2. Copy `config.example.json` to `config.json` next to the exe and fill in:
    - `apiKey` — your CurseForge API key
    - `pollIntervalSeconds` — how often to check (e.g. `300` = every 5 minutes)
