@@ -62,6 +62,13 @@ public static class Program
             Log($"WARNING: batFilePath '{_config.BatFilePath}' was not found. The app will keep polling, " +
                 "but will fail to run the bat file if an update is detected until this is fixed.");
         }
+        WarnIfPathLooksCorrupted("batFilePath", _config.BatFilePath);
+
+        foreach (var server in _config.CrashMonitor.Servers)
+        {
+            WarnIfPathLooksCorrupted($"crashMonitor.servers[{server.Name}].processPath", server.ProcessPath);
+            WarnIfPathLooksCorrupted($"crashMonitor.servers[{server.Name}].runCmdPath", server.RunCmdPath);
+        }
 
         using var httpClient = new HttpClient { BaseAddress = new Uri("https://api.curseforge.com") };
         httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -242,6 +249,7 @@ public static class Program
     private static async Task RunOneCycleAsync(HttpClient httpClient)
     {
         var library = LoadLibrary();
+        PruneRemovedProjects(library);
 
         var request = new CurseForgeBatchRequest { ModIds = _projectIds };
         using var response = await httpClient.PostAsJsonAsync("/v1/mods", request);
@@ -361,6 +369,19 @@ public static class Program
         }
     }
 
+    private static void PruneRemovedProjects(LibraryState library)
+    {
+        var currentIds = new HashSet<string>(_projectIds.Select(id => id.ToString()));
+        var staleKeys = library.Projects.Keys.Where(key => !currentIds.Contains(key)).ToList();
+
+        foreach (var key in staleKeys)
+        {
+            var entry = library.Projects[key];
+            Log($"Project ID {key} ('{entry.Name}') is no longer in config.json's projectIds — removing its library.json entry.");
+            library.Projects.Remove(key);
+        }
+    }
+
     private static LibraryState LoadLibrary()
     {
         if (!File.Exists(_libraryPath))
@@ -385,6 +406,32 @@ public static class Program
         var tempPath = _libraryPath + ".tmp";
         File.WriteAllText(tempPath, JsonSerializer.Serialize(library, JsonOptions));
         File.Move(tempPath, _libraryPath, overwrite: true);
+    }
+
+    private static void WarnIfPathLooksCorrupted(string label, string? path)
+    {
+        if (string.IsNullOrEmpty(path))
+        {
+            return;
+        }
+
+        // A raw control character in a path almost always means a JSON path string had single
+        // backslashes instead of doubled ones (e.g. "\r" in "...\run.cmd" parsed as an actual
+        // carriage return by the JSON parser, rather than a literal backslash + 'r').
+        if (path.Any(char.IsControl))
+        {
+            var escaped = path
+                .Replace("\r", "\\r")
+                .Replace("\n", "\\n")
+                .Replace("\t", "\\t");
+
+            Log($"WARNING: config.json '{label}' contains a non-printable control character — " +
+                $"this is almost always caused by single backslashes in a JSON path string " +
+                $"(e.g. \"\\r\", \"\\n\", \"\\t\", \"\\b\", or \"\\f\" being parsed as an actual " +
+                $"control character instead of a literal backslash + letter). Use double " +
+                $"backslashes (\\\\) or forward slashes (/) in JSON path strings instead. " +
+                $"Value as configured (control chars shown escaped): '{escaped}'");
+        }
     }
 
     private static List<int> ParseProjectIds(string csvLine)
