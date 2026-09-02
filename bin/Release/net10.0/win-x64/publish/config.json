@@ -1,0 +1,75 @@
+{
+  "apiKey": "",
+  "pollIntervalSeconds": 3600,
+  "batFilePath": "modupdateshutdown.bat",
+  "libraryFilePath": "library.json",
+  "batFileTimeoutSeconds": 0,
+  "projectIds": "990449,1465909,1445744,955333",
+  "crashMonitor": {
+    "enabled": true,
+    "checkIntervalSeconds": 60,
+    "restartCooldownSeconds": 120,
+    "servers": [
+      {
+        "name": "Aberration",
+        "processPath": "D:\\servers\\AberrationASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\AberrationASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      },
+	  {
+        "name": "Astraeos",
+        "processPath": "D:\\servers\\AstraeosASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\AstraeosASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      },
+	  {
+        "name": "Center",
+        "processPath": "D:\\servers\\CenterASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\CenterASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      },
+	  {
+        "name": "ClubArk",
+        "processPath": "D:\\servers\\ClubArkASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\ClubArkASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      },
+	  {
+        "name": "Extinction",
+        "processPath": "D:\\servers\\ExtinctionASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\ExtinctionASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      },
+	  {
+        "name": "Genesis Simulation",
+        "processPath": "D:\\servers\\Gen1ASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\Gen1ASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      },
+	  {
+        "name": "Island",
+        "processPath": "D:\\servers\\IslandASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\IslandASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      },
+	  {
+        "name": "LostColony",
+        "processPath": "D:\\servers\\LostColonyASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\LostColonyASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      },
+	  {
+        "name": "Ragnarok",
+        "processPath": "D:\\servers\\RagnarokASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\RagnarokASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      },
+	  {
+        "name": "Reverence",
+        "processPath": "D:\\servers\\ReverenceASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\ReverenceASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      },
+	  {
+        "name": "Scorched Earth",
+        "processPath": "D:\\servers\\ScorchedASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\ScorchedASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      },
+	   {
+        "name": "Valguero",
+        "processPath": "D:\\servers\\ValgueroASM\\ShooterGame\\Binaries\\Win64\\AsaApiLoader.exe",
+        "runCmdPath": "D:\\servers\\ValgueroASM\\ShooterGame\\Saved\\Config\\WindowsServer\\run.cmd"
+      }
+    ]
+  }
+}
