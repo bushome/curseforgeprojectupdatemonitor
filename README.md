@@ -56,7 +56,14 @@ to the exe automatically.
    - `projectIds` — a single comma-delimited line of the CurseForge mod IDs to
      watch (the number on a mod's CurseForge page, e.g. under "About Project"),
      e.g. `"955333,985370,942249"`. Spaces around commas are fine.
-   - `batFileTimeoutSeconds` — optional; `0` means wait as long as it takes
+   - `batFileTimeoutSeconds` — optional; only applies to this broadcast/restart
+     bat file, not to crash-monitor restarts (see below). After launching it, the
+     app waits for it to finish before resuming mod-update polling — this value
+     caps how long it'll wait. `0` (the default) means wait indefinitely, no
+     matter how long the bat file takes. Set a positive number (seconds) only if
+     you want a safety valve in case the bat file ever hangs — if it doesn't
+     finish within that time, the app logs a warning and resumes polling anyway,
+     leaving the bat file running uncontrolled in the background.
 3. Run the exe. On the very first run it records the current file ID for every
    project as a baseline (no bat file triggered) — updates are only detected
    from the second successful check onward.
