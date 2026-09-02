@@ -42,6 +42,9 @@ to the exe automatically.
 > `-p:IncludeNativeLibrariesForSelfExtract=true` — that's the self-contained
 > version this project started as.
 
+Any projectID you remove from the `config.json` will get automatically removed from
+the generated `library.json`....unlike the ark servers....typical Wild Card logic...
+
 ## Setup
 
 1. Get a CurseForge Core API key:
