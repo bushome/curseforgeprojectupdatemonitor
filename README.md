@@ -52,7 +52,11 @@ to the exe automatically.
 2. Copy `config.example.json` to `config.json` next to the exe and fill in:
    - `apiKey` — your CurseForge API key
    - `pollIntervalSeconds` — how often to check (e.g. `300` = every 5 minutes)
-   - `batFilePath` — full path to your existing broadcast/restart bat file
+   - `batFilePath` — path to your existing broadcast/restart bat file. Can be a
+     full path, or a relative one like `..\shutdown.bat` — relative paths are
+     resolved against the exe's own folder (not whatever folder happens to be
+     "current" when it's launched), so a plain filename works if the bat file
+     sits right next to the exe, and `..\` works if it's one folder up.
    - `projectIds` — a single comma-delimited line of the CurseForge mod IDs to
      watch (the number on a mod's CurseForge page, e.g. under "About Project"),
      e.g. `"955333,985370,942249"`. Spaces around commas are fine.
@@ -87,6 +91,14 @@ A separate, independently-scheduled feature — toggle it on in `config.json` un
 configured server's process is still running, and restarts it via that server's
 own `run.cmd` if not.
 
+**It automatically pauses while your mod-update bat file is running.** Since
+that bat file brings servers down and back up on its own, the crash monitor
+would otherwise see a server's process disappear mid-restart and try to
+"fix" it with its own `run.cmd` call — stepping on the bat file's own restart
+sequence. Instead, the crash monitor checks a shared flag each cycle: if the
+bat file is currently running, it skips that check entirely (logging it once,
+not every cycle) and resumes automatically the moment the bat file exits.
+
 ```json
 "crashMonitor": {
   "enabled": true,
@@ -108,10 +120,12 @@ own `run.cmd` if not.
 - `restartCooldownSeconds` — minimum time between restart attempts for the same
   server, so a server that's stuck for some other reason (bad config, disk full,
   etc.) doesn't get hammered with restart attempts every 30 seconds.
-- Add one entry per server. `processPath` must be the full path to that specific
-  server's exe (from its `run.cmd`) — since every map runs the same `AsaApiLoader.exe`
+- Add one entry per server. `processPath` must point at that specific server's
+  exe (from its `run.cmd`) — since every map runs the same `AsaApiLoader.exe`
   binary name from a different folder, matching on the full path is what tells
-  Aberration's process apart from every other map's.
+  Aberration's process apart from every other map's. `runCmdPath` and
+  `processPath` can both be relative to the monitor exe's own folder (same rule
+  as `batFilePath` above) if that's more convenient than typing full paths.
 - On a detected crash it just re-runs `runCmdPath` as-is (same as double-clicking
   it) and logs it — no broadcast bat, no other side effects. Your `run.cmd`'s own
   `start` command handles backgrounding the actual server process, exactly like a

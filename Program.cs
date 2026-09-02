@@ -22,6 +22,7 @@ public static class Program
     private static string _configPath = "";
     private static string _libraryPath = "";
     private static List<int> _projectIds = new();
+    private static volatile bool _batFileInProgress;
 
     public static async Task<int> Main(string[] args)
     {
@@ -39,10 +40,16 @@ public static class Program
         _config = JsonSerializer.Deserialize<AppConfig>(await File.ReadAllTextAsync(_configPath), configReadOptions)
                   ?? throw new InvalidOperationException("config.json is empty or invalid.");
 
-        // Resolve library.json relative to the exe if a relative path was given.
-        _libraryPath = Path.IsPathRooted(_config.LibraryFilePath)
-            ? _config.LibraryFilePath
-            : Path.Combine(ExeDirectory, _config.LibraryFilePath);
+        // Resolve any relative paths in config.json against the exe's own folder — not the
+        // process's current working directory, which can vary depending on how the exe is
+        // launched (double-click, Task Scheduler, another script, etc.).
+        _libraryPath = ResolveConfigPath(_config.LibraryFilePath);
+        _config.BatFilePath = ResolveConfigPath(_config.BatFilePath);
+        foreach (var server in _config.CrashMonitor.Servers)
+        {
+            server.ProcessPath = ResolveConfigPath(server.ProcessPath);
+            server.RunCmdPath = ResolveConfigPath(server.RunCmdPath);
+        }
 
         if (string.IsNullOrWhiteSpace(_config.ApiKey))
         {
@@ -138,18 +145,36 @@ public static class Program
         // Tracks the last restart attempt per server (by name) so a server that keeps failing
         // to come up doesn't get hammered with restart attempts every single check interval.
         var lastRestartAttempt = new Dictionary<string, DateTimeOffset>();
+        var loggedPause = false;
 
         while (!token.IsCancellationRequested)
         {
-            foreach (var server in _config.CrashMonitor.Servers)
+            if (_batFileInProgress)
             {
-                try
+                if (!loggedPause)
                 {
-                    CheckAndRestartIfCrashed(server, lastRestartAttempt);
+                    Log("Pausing crash checks — mod-update bat file is currently running (avoids restarting a server it's already bringing down/up).");
+                    loggedPause = true;
                 }
-                catch (Exception ex)
+            }
+            else
+            {
+                if (loggedPause)
                 {
-                    Log($"ERROR checking server '{server.Name}': {ex.Message}");
+                    Log("Resuming crash checks — mod-update bat file finished.");
+                    loggedPause = false;
+                }
+
+                foreach (var server in _config.CrashMonitor.Servers)
+                {
+                    try
+                    {
+                        CheckAndRestartIfCrashed(server, lastRestartAttempt);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log($"ERROR checking server '{server.Name}': {ex.Message}");
+                    }
                 }
             }
 
@@ -331,6 +356,7 @@ public static class Program
             return;
         }
 
+        _batFileInProgress = true;
         try
         {
             var psi = new ProcessStartInfo
@@ -366,6 +392,10 @@ public static class Program
         catch (Exception ex)
         {
             Log($"ERROR running bat file: {ex.Message}");
+        }
+        finally
+        {
+            _batFileInProgress = false;
         }
     }
 
@@ -406,6 +436,18 @@ public static class Program
         var tempPath = _libraryPath + ".tmp";
         File.WriteAllText(tempPath, JsonSerializer.Serialize(library, JsonOptions));
         File.Move(tempPath, _libraryPath, overwrite: true);
+    }
+
+    private static string ResolveConfigPath(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return path ?? "";
+        }
+
+        return Path.IsPathRooted(path)
+            ? path
+            : Path.GetFullPath(Path.Combine(ExeDirectory, path));
     }
 
     private static void WarnIfPathLooksCorrupted(string label, string? path)
