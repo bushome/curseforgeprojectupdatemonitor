@@ -132,7 +132,9 @@ not every cycle) and resumes automatically the moment the bat file exits.
   binary name from a different folder, matching on the full path is what tells
   Aberration's process apart from every other map's. `runCmdPath` and
   `processPath` can both be relative to the monitor exe's own folder (same rule
-  as `batFilePath` above) if that's more convenient than typing full paths.
+  as `batFilePath` above) if that's more convenient than typing full paths. You
+  just need to rename them runab.cmd, runast.cmd, runcenter.cmd etc if you want to
+  keep everything contained in the same working directory.
 - On a detected crash it just re-runs `runCmdPath` as-is (same as double-clicking
   it) and logs it — no broadcast bat, no other side effects. Your `run.cmd`'s own
   `start` command handles backgrounding the actual server process, exactly like a
