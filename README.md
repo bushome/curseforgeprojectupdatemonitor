@@ -22,7 +22,7 @@ rather than 60-100MB), but every machine that *runs* it needs the .NET 10
 **Runtime** installed — specifically the console app runtime, not the SDK and
 not the ASP.NET Core Runtime (that one's for web apps):
 https://dotnet.microsoft.com/en-us/download/dotnet/10.0/runtime
-Install it once on each server before running the exe there.
+Install it once on each host before running the exe there.
 
 ```
 dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true
