@@ -158,11 +158,6 @@ not every cycle) and resumes automatically the moment the bat file exits.
   }
 }
 ```
-
-This schema is a first draft — if it needs to line up with the format your
-other tooling already uses, share that example and it's a quick change to
-`LibraryEntry` in `Models.cs`.
-
 ## Logging
 
 Everything is written to both the console and `monitor.log` (append-only, next
