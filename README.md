@@ -8,7 +8,9 @@ everything else — RCON broadcast via `mcrcon.exe`, server restarts, etc.
 This application was originally made so I could monitor mod updates I have running on 
 my Ark Ascended server cluster but it can be configured to be used for just about anything 
 since it calls a bat file on update found. What you define in the bat file decides it's end
-use on how you want to utilize update events from CF.
+use on how you want to utilize update events from CF. The crash monitor part is just cheap
+insurance since servers don't always want to restart the first time after a mod update....
+for whatever reason.
 
 ## Build
 
