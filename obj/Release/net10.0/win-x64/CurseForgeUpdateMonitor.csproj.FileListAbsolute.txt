@@ -12,3 +12,18 @@ C:\Coding Projects\CurseForgeUpdateMonitor\obj\Release\net10.0\win-x64\refint\Cu
 C:\Coding Projects\CurseForgeUpdateMonitor\obj\Release\net10.0\win-x64\CurseForgeUpdateMonitor.pdb
 C:\Coding Projects\CurseForgeUpdateMonitor\obj\Release\net10.0\win-x64\CurseForgeUpdateMonitor.genruntimeconfig.cache
 C:\Coding Projects\CurseForgeUpdateMonitor\obj\Release\net10.0\win-x64\ref\CurseForgeUpdateMonitor.dll
+C:\Dev\curseforgeprojectupdatemonitor\bin\Release\net10.0\win-x64\CurseForgeUpdateMonitor.exe
+C:\Dev\curseforgeprojectupdatemonitor\bin\Release\net10.0\win-x64\CurseForgeUpdateMonitor.deps.json
+C:\Dev\curseforgeprojectupdatemonitor\bin\Release\net10.0\win-x64\CurseForgeUpdateMonitor.runtimeconfig.json
+C:\Dev\curseforgeprojectupdatemonitor\bin\Release\net10.0\win-x64\CurseForgeUpdateMonitor.dll
+C:\Dev\curseforgeprojectupdatemonitor\bin\Release\net10.0\win-x64\CurseForgeUpdateMonitor.pdb
+C:\Dev\curseforgeprojectupdatemonitor\obj\Release\net10.0\win-x64\CurseForgeUpdateMonitor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\curseforgeprojectupdatemonitor\obj\Release\net10.0\win-x64\CurseForgeUpdateMonitor.AssemblyInfoInputs.cache
+C:\Dev\curseforgeprojectupdatemonitor\obj\Release\net10.0\win-x64\CurseForgeUpdateMonitor.AssemblyInfo.cs
+C:\Dev\curseforgeprojectupdatemonitor\obj\Release\net10.0\win-x64\CurseForgeUpdateMonitor.csproj.CoreCompileInputs.cache
+C:\Dev\curseforgeprojectupdatemonitor\obj\Release\net10.0\win-x64\CurseForgeUpdateMonitor.sourcelink.json
+C:\Dev\curseforgeprojectupdatemonitor\obj\Release\net10.0\win-x64\CurseForgeUpdateMonitor.dll
+C:\Dev\curseforgeprojectupdatemonitor\obj\Release\net10.0\win-x64\refint\CurseForgeUpdateMonitor.dll
+C:\Dev\curseforgeprojectupdatemonitor\obj\Release\net10.0\win-x64\CurseForgeUpdateMonitor.pdb
+C:\Dev\curseforgeprojectupdatemonitor\obj\Release\net10.0\win-x64\CurseForgeUpdateMonitor.genruntimeconfig.cache
+C:\Dev\curseforgeprojectupdatemonitor\obj\Release\net10.0\win-x64\ref\CurseForgeUpdateMonitor.dll

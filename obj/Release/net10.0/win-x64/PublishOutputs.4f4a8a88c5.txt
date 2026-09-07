@@ -1,0 +1,2 @@
+C:\Dev\curseforgeprojectupdatemonitor\bin\Release\net10.0\win-x64\publish\CurseForgeUpdateMonitor.pdb
+C:\Dev\curseforgeprojectupdatemonitor\bin\Release\net10.0\win-x64\publish\CurseForgeUpdateMonitor.exe
