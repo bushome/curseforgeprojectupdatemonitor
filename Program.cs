@@ -197,8 +197,20 @@ public static class Program
             return;
         }
 
-        if (IsProcessRunning(server.ProcessPath))
+        var status = CheckProcessStatus(server.ProcessPath, server.Name);
+        if (status == ProcessCheckResult.Running)
         {
+            return;
+        }
+
+        if (status == ProcessCheckResult.Inconclusive)
+        {
+            // Could not confirm either way (most likely an elevation/permissions mismatch —
+            // see the WARNING already logged in CheckProcessStatus). Do NOT restart: treating
+            // "can't tell" as "must be down" is exactly what causes a healthy, already-running
+            // server to get a duplicate instance launched on top of it.
+            Log($"'{server.Name}' status could not be confirmed this cycle — skipping restart " +
+                $"(will re-check next interval rather than assume it's down).");
             return;
         }
 
@@ -219,30 +231,63 @@ public static class Program
         RestartServer(server);
     }
 
-    private static bool IsProcessRunning(string processPath)
+    /// <summary>
+    /// Result of checking whether a monitored server's process is currently running.
+    /// Deliberately three-valued: an inconclusive check (e.g. access denied) must never be
+    /// treated the same as "confirmed not running", or a permissions problem can masquerade
+    /// as a crash and trigger a duplicate restart of an already-healthy server.
+    /// </summary>
+    private enum ProcessCheckResult
+    {
+        Running,
+        NotRunning,
+        Inconclusive,
+    }
+
+    private static ProcessCheckResult CheckProcessStatus(string processPath, string serverName)
     {
         var exeName = Path.GetFileNameWithoutExtension(processPath);
-        foreach (var proc in Process.GetProcessesByName(exeName))
+        var candidates = Process.GetProcessesByName(exeName);
+        var sawInconclusive = false;
+
+        try
         {
-            try
+            foreach (var proc in candidates)
             {
-                var modulePath = proc.MainModule?.FileName;
-                if (modulePath is not null && string.Equals(modulePath, processPath, StringComparison.OrdinalIgnoreCase))
+                try
                 {
-                    return true;
+                    var modulePath = proc.MainModule?.FileName;
+                    if (modulePath is not null && string.Equals(modulePath, processPath, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return ProcessCheckResult.Running;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // MainModule throws when we can't open the process to read its module info.
+                    // The most common cause by far: this app is running at a lower integrity
+                    // level (not elevated) than the target process (elevated), which Windows
+                    // silently blocks even under the same user account. That is NOT the same
+                    // thing as "the process doesn't exist" — log it and mark the check
+                    // inconclusive rather than assuming the server is down.
+                    sawInconclusive = true;
+                    Log($"WARNING: could not inspect PID {proc.Id} ('{exeName}') while checking " +
+                        $"'{serverName}' — {ex.GetType().Name}: {ex.Message}. If this happens for " +
+                        $"every check, the monitor is very likely NOT running elevated while the " +
+                        $"server is — right-click the monitor's shortcut and enable 'Run as " +
+                        $"administrator', or rebuild with the included app.manifest.");
                 }
             }
-            catch
-            {
-                // MainModule can throw (access denied, 32/64-bit mismatch, process exited mid-check) — treat as "can't confirm", not a match.
-            }
-            finally
+        }
+        finally
+        {
+            foreach (var proc in candidates)
             {
                 proc.Dispose();
             }
         }
 
-        return false;
+        return sawInconclusive ? ProcessCheckResult.Inconclusive : ProcessCheckResult.NotRunning;
     }
 
     private static void RestartServer(MonitoredServer server)

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lpECvcG9kIM=",
+  "dgSpecHash": "FJOZ25WLb0E=",
   "success": true,
-  "projectFilePath": "C:\\Coding Projects\\CurseForgeUpdateMonitor\\CurseForgeUpdateMonitor.csproj",
+  "projectFilePath": "C:\\Dev\\curseforgeprojectupdatemonitor\\CurseForgeUpdateMonitor.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\firef\\.nuget\\packages\\microsoft.net.illink.tasks\\10.0.11\\microsoft.net.illink.tasks.10.0.11.nupkg.sha512",
     "C:\\Users\\firef\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\10.0.11\\microsoft.netcore.app.runtime.win-x64.10.0.11.nupkg.sha512",

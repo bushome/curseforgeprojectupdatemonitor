@@ -15,6 +15,12 @@
     <SelfContained>false</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
     <InvariantGlobalization>true</InvariantGlobalization>
+
+    <!-- Always request elevation (UAC prompt) so this exe runs at the same integrity level
+         regardless of how it's launched (scheduled task, shortcut, manual double-click).
+         See app.manifest for why: Process.MainModule access silently fails across integrity
+         levels, which the crash monitor must never confuse with "process is not running." -->
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
 </Project>

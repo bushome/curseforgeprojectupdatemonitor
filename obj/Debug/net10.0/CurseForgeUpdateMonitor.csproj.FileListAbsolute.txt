@@ -1,0 +1,15 @@
+C:\Dev\curseforgeprojectupdatemonitor\bin\Debug\net10.0\CurseForgeUpdateMonitor.exe
+C:\Dev\curseforgeprojectupdatemonitor\bin\Debug\net10.0\CurseForgeUpdateMonitor.deps.json
+C:\Dev\curseforgeprojectupdatemonitor\bin\Debug\net10.0\CurseForgeUpdateMonitor.runtimeconfig.json
+C:\Dev\curseforgeprojectupdatemonitor\bin\Debug\net10.0\CurseForgeUpdateMonitor.dll
+C:\Dev\curseforgeprojectupdatemonitor\bin\Debug\net10.0\CurseForgeUpdateMonitor.pdb
+C:\Dev\curseforgeprojectupdatemonitor\obj\Debug\net10.0\CurseForgeUpdateMonitor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\curseforgeprojectupdatemonitor\obj\Debug\net10.0\CurseForgeUpdateMonitor.AssemblyInfoInputs.cache
+C:\Dev\curseforgeprojectupdatemonitor\obj\Debug\net10.0\CurseForgeUpdateMonitor.AssemblyInfo.cs
+C:\Dev\curseforgeprojectupdatemonitor\obj\Debug\net10.0\CurseForgeUpdateMonitor.csproj.CoreCompileInputs.cache
+C:\Dev\curseforgeprojectupdatemonitor\obj\Debug\net10.0\CurseForgeUpdateMonitor.sourcelink.json
+C:\Dev\curseforgeprojectupdatemonitor\obj\Debug\net10.0\CurseForgeUpdateMonitor.dll
+C:\Dev\curseforgeprojectupdatemonitor\obj\Debug\net10.0\refint\CurseForgeUpdateMonitor.dll
+C:\Dev\curseforgeprojectupdatemonitor\obj\Debug\net10.0\CurseForgeUpdateMonitor.pdb
+C:\Dev\curseforgeprojectupdatemonitor\obj\Debug\net10.0\CurseForgeUpdateMonitor.genruntimeconfig.cache
+C:\Dev\curseforgeprojectupdatemonitor\obj\Debug\net10.0\ref\CurseForgeUpdateMonitor.dll

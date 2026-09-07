@@ -81,11 +81,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Coding Projects\\CurseForgeUpdateMonitor\\CurseForgeUpdateMonitor.csproj",
+      "projectUniqueName": "C:\\Dev\\curseforgeprojectupdatemonitor\\CurseForgeUpdateMonitor.csproj",
       "projectName": "CurseForgeUpdateMonitor",
-      "projectPath": "C:\\Coding Projects\\CurseForgeUpdateMonitor\\CurseForgeUpdateMonitor.csproj",
+      "projectPath": "C:\\Dev\\curseforgeprojectupdatemonitor\\CurseForgeUpdateMonitor.csproj",
       "packagesPath": "C:\\Users\\firef\\.nuget\\packages\\",
-      "outputPath": "C:\\Coding Projects\\CurseForgeUpdateMonitor\\obj\\",
+      "outputPath": "C:\\Dev\\curseforgeprojectupdatemonitor\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\firef\\AppData\\Roaming\\NuGet\\NuGet.Config"
