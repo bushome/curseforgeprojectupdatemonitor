@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CurseForgeUpdateMonitor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+beaa72d2125b1d4bed8eabfc0643b9c4077ef241")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2b01acf1365e6d435728c7d107c9d1b7c61b9b5")]
 [assembly: System.Reflection.AssemblyProductAttribute("CurseForgeUpdateMonitor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CurseForgeUpdateMonitor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
