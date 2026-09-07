@@ -15,8 +15,6 @@
       \___/| .__/ \__,_|\__,_|\__\___| |_|  |_|\___/|_| |_|_|\__\___/|_|   
            |_|
 ```
-# CurseForge Update Monitor
-
 Polls the CurseForge API for a list of project (mod) IDs on an interval you set in
 `config.json`. When any project's latest file changes, it runs your bat file once
 (waits for it to finish, then keeps polling). Your bat file is responsible for
