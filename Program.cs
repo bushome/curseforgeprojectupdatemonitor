@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
+using System.Threading;
 
 namespace CurseForgeUpdateMonitor;
 
@@ -24,8 +25,23 @@ public static class Program
     private static List<int> _projectIds = new();
     private static volatile bool _batFileInProgress;
 
+    // Fixed, unique name for the single-instance mutex. Using "Global\" makes this a
+    // machine-wide lock rather than per-session, so it also catches a second instance
+    // launched from a different session (e.g. one from a Task Scheduler session and one
+    // from an interactive desktop session) — which is exactly the scenario a startup bat
+    // could otherwise collide with if the monitor was already running from an earlier boot
+    // step or a manual launch.
+    private const string SingleInstanceMutexName = @"Global\CurseForgeUpdateMonitor-SingleInstance";
+
     public static async Task<int> Main(string[] args)
     {
+        using var singleInstanceMutex = new Mutex(initiallyOwned: true, SingleInstanceMutexName, out var createdNew);
+        if (!createdNew)
+        {
+            Log("Another instance of CurseForgeUpdateMonitor is already running. Exiting.");
+            return 1;
+        }
+
         _configPath = args.Length > 0
             ? args[0]
             : Path.Combine(ExeDirectory, "config.json");
