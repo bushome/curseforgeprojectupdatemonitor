@@ -7,7 +7,7 @@
   "targets": {
     ".NETCoreApp,Version=v10.0": {},
     ".NETCoreApp,Version=v10.0/win-x64": {
-      "CurseForgeUpdateMonitor/1.0.0": {
+      "CurseForgeUpdateMonitor/1.3.0": {
         "runtime": {
           "CurseForgeUpdateMonitor.dll": {}
         }
@@ -15,7 +15,7 @@
     }
   },
   "libraries": {
-    "CurseForgeUpdateMonitor/1.0.0": {
+    "CurseForgeUpdateMonitor/1.3.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

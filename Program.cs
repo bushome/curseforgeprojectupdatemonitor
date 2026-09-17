@@ -42,6 +42,9 @@ public static class Program
             return 1;
         }
 
+        var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        Log($"CurseForgeUpdateMonitor v{version} starting.");
+
         _configPath = args.Length > 0
             ? args[0]
             : Path.Combine(ExeDirectory, "config.json");
