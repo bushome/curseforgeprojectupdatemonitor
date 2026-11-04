@@ -178,3 +178,8 @@ not every cycle) and resumes automatically the moment the bat file exits.
 Everything is written to both the console and `monitor.log` (append-only, next
 to the exe) — poll results, detected updates, API errors, and bat file exit
 codes.
+
+## Development
+
+Developed with AI assistance (Claude). Every change was reviewed and tested on a dedicated test server
+before going live.
